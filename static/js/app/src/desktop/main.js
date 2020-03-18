@@ -22,7 +22,7 @@ var newfilenameY=0;
 var newfilename_rename="";
 var oldfilename="";
 
-        var iconsize=0; 
+        var iconsize=3; 
 		
 ///var saving_desktopini=false;
 
@@ -99,14 +99,14 @@ function checkurl(DATAURL) {
       },
       success: function(dataout){
          //alert(dataout);
-         console.log("*** check url success");
+         //console.log("*** check url success");
 		 if (dataout=="YES") check_tmpdata=true;
 		 else check_tmpdata=false; 
 		 
       },   
       error: function(msg){
          //alert(msg);
-         console.log("*** check url error");
+         //console.log("*** check url error");
 		 check_tmpdata=false;
       }
 	  
@@ -5722,13 +5722,17 @@ define("app/src/explorer/ui", ["./fileContent", "../../path/tpl/file/list.html"]
                 else if ($(".box-size-big").hasClass("selected")) iconsize=4; 
                 else if ($(".box-size-bigx").hasClass("selected")) iconsize=5;    */
 				
+				
+
 				iconsize = G.userConfig["fileIconSizeDesktop"];
 				if (iconsize==40) iconsize=1; 
 				else if (iconsize==60) iconsize=2; 
 				else if (iconsize==80) iconsize=3; 
 				else if (iconsize==100) iconsize=4; 
 				else if (iconsize==120) iconsize=5; 
-                //console.log("iconsize: "+iconsize);   
+                else if (typeof iconsize == 'undefined') iconsize=3;
+				console.log("iconsize: "+iconsize); 
+  
 				
 				icontops[0]=20;
 				iconlefts[0]=20;
@@ -5879,12 +5883,13 @@ define("app/src/explorer/ui", ["./fileContent", "../../path/tpl/file/list.html"]
 						//Desktop.ini is missing create new icon positions
 					    
                         if (iconsize>0) {
-						var fileelements=[];
+						fileelements=[];
+						tmp=0;
                         $(".file-continer .file").each(function(nc,ncn) {
      		    			fileelements[1]=20;
 	         				fileelements[2]=20;
-                            fileelements[1]=Math.round(fileelements[1]); //top
-                            fileelements[2]=Math.round(fileelements[2]); //left
+                            ///fileelements[1]=Math.round(fileelements[1]); //top
+                            ///fileelements[2]=Math.round(fileelements[2]); //left
 
                           
                             // arrange icons on desktop ***************************************************************************************
@@ -5995,6 +6000,8 @@ define("app/src/explorer/ui", ["./fileContent", "../../path/tpl/file/list.html"]
 				else if (iconsize==80) iconsize=3; 
 				else if (iconsize==100) iconsize=4; 
 				else if (iconsize==120) iconsize=5; 
+                else if (typeof iconsize == 'undefined') iconsize=3;
+
                 //console.log("iconsize: "+iconsize);   
 
 				
@@ -8712,6 +8719,7 @@ define("app/src/explorer/fileSelect", [], function(a, b) {
 							else if (iconsize==80) iconsize=3; 
 							else if (iconsize==100) iconsize=4; 
 							else if (iconsize==120) iconsize=5; 
+                            else if (typeof iconsize == 'undefined') iconsize=3;
 							//console.log("iconsize: "+iconsize);   
 							
 
@@ -8817,6 +8825,7 @@ define("app/src/explorer/fileSelect", [], function(a, b) {
 				        else if (iconsize==80) iconsize=3; 
 		        		else if (iconsize==100) iconsize=4; 
         				else if (iconsize==120) iconsize=5; 
+                        else if (typeof iconsize == 'undefined') iconsize=3;
                         //console.log("iconsize: "+iconsize);   
 
                            
